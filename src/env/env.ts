@@ -1,8 +1,6 @@
 import z from 'zod';
-import dotenv from 'dotenv';
-
+import * as dotenv from 'dotenv';
 dotenv.config();
-
 const envSchema = z.object({
   DB_PASSWORD: z.string(),
   CONECTION_STRING: z.string(),
