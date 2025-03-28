@@ -7,4 +7,5 @@ services:
     ports:
       - 27017:27017
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: mongo
