@@ -4,6 +4,7 @@ dotenv.config();
 const envSchema = z.object({
   DB_PASSWORD: z.string(),
   CONECTION_STRING: z.string(),
+  JWT_SECRET: z.string(),
 });
 
 const envParse = envSchema.safeParse(process.env);
