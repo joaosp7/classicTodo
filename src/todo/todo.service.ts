@@ -3,6 +3,7 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Todo } from '../schemas/todo.schema';
 import { Model } from 'mongoose';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Injectable()
 export class TodoService {
@@ -18,7 +19,14 @@ export class TodoService {
   }
 
   async findOne(id: string) {
-    console.log(id + 'TODOOOOOO');
     return await this.todoModel.findOne({ id });
+  }
+
+  async updateOneById(id: string, newTodo: UpdateTodoDto) {
+    return await this.todoModel.updateOne({ id }, newTodo);
+  }
+
+  async deleteTodoById(id: string) {
+    return await this.todoModel.deleteOne({ id });
   }
 }

@@ -29,4 +29,14 @@ export class TodoController {
   async findByID(@Param('id') id: string) {
     return await this.todoService.findOne(id);
   }
+
+  @Patch('/:id')
+  async updateTodo(@Param('id') id: string, @Body() newTodo: UpdateTodoDto) {
+    return await this.todoService.updateOneById(id, newTodo);
+  }
+
+  @Delete('/:id')
+  async deleteTodo(@Param('id') id: string) {
+    return await this.todoService.deleteTodoById(id);
+  }
 }
