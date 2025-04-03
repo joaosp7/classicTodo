@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsISO8601, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateTodoDto {
   @IsNotEmpty()
@@ -6,7 +6,7 @@ export class CreateTodoDto {
   @IsOptional()
   description?: string;
   @IsNotEmpty()
-  @IsDate()
+  @IsISO8601()
   dueDate: Date;
   @IsOptional()
   project?: string;
