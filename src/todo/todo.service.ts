@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Todo } from '../schemas/todo.schema';
+import { Todos } from '../schemas/todo.schema';
 import { Model } from 'mongoose';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { TodoRepository } from './repository/todo.repository';
 
 @Injectable()
 export class TodoService {
-  constructor(@InjectModel(Todo.name) private todoModel: Model<Todo>) {}
+  constructor(
+    @InjectModel(Todos.name) private todoModel: Model<Todos>,
+    private readonly todoRepository: TodoRepository,
+  ) {}
 
   async create(createTodoDto: CreateTodoDto, userId: string) {
     const todo = new this.todoModel({ ...createTodoDto, userId: userId });
@@ -28,5 +32,25 @@ export class TodoService {
 
   async deleteTodoById(id: string) {
     return await this.todoModel.deleteOne({ id });
+  }
+
+  async createTodo(createtodoDto: CreateTodoDto) {
+    return await this.todoRepository.createTodo(createtodoDto);
+  }
+
+  async getTodos() {
+    return await this.todoRepository.getAll();
+  }
+
+  async getOneTodo(id: number) {
+    return await this.todoRepository.findById(id);
+  }
+
+  async updateOneTodo(dto: UpdateTodoDto, id: number) {
+    return await this.todoRepository.updateOneById(id, dto);
+  }
+
+  async delete(id: number) {
+    return await this.todoRepository.deleteOneById(id);
   }
 }

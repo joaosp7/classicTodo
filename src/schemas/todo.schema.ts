@@ -2,10 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types, Schema as MongooseSchema } from 'mongoose';
 import { v4 } from 'uuid';
 
-export type TodoDocument = HydratedDocument<Todo>;
+export type TodoDocument = HydratedDocument<Todos>;
 
 @Schema({ collection: 'todos', timestamps: true })
-export class Todo {
+export class Todos {
   @Prop({
     default: function () {
       return v4().toLocaleUpperCase();
@@ -30,4 +30,4 @@ export class Todo {
   userId: Types.ObjectId;
 }
 
-export const TodoSchema = SchemaFactory.createForClass(Todo);
+export const TodoSchema = SchemaFactory.createForClass(Todos);

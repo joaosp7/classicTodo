@@ -21,6 +21,16 @@ export class TodoController {
     return this.todoService.create(createTodoDto, userId);
   }
 
+  @Post('postgres')
+  async createTodo(@Body() createTodo) {
+    return await this.todoService.createTodo(createTodo);
+  }
+
+  @Get('postgres')
+  async findAllTodos() {
+    return await this.todoService.getTodos();
+  }
+
   @Get()
   findAll() {
     return this.todoService.findAll();
