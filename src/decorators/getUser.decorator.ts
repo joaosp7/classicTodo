@@ -1,5 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { env } from '../env/env';
 
 export const GetUser = createParamDecorator(
   (data: string | undefined, ctx: ExecutionContext) => {
@@ -11,7 +12,7 @@ export const GetUser = createParamDecorator(
     }
 
     const jwtService = new JwtService({
-      secret: process.env.JWT_SECRET,
+      secret: env.JWT_SECRET,
     });
 
     try {
